@@ -1,0 +1,40 @@
+//start with docker file using centos:latest image pulled from docker hub
+docker build -t jenkin:latest.
+//run container 
+docker run -it --priviliged-p 9999:8080 -v /:/host jnkin : latest
+
+//creating jobs in jenkins using build pipeline plugin can be done through basic click in options available as a GUI 
+//Install Github plugin in jenkins
+//j1: Pull the GitHub repo automatically when some developers push the repo to GitHub
+CMD SHELL:    rm -rf /host/web-repo
+              mkdir /host/web-repo
+              cp -r /host/eb-repo
+//j2: By looking at the code or program file, 
+//Jenkins should automatically start the respective language interpreter install image container to deploy code
+CMD SHELL: chroot /host/bin/bash <<"EOT"
+           export len=$(ls /eb-repo |grep index |grep html |c -l)
+           if [ $len -gt 0 ]
+           then 
+           if docker ps | grep prod_deploy
+           then 
+           docker rm -f prod_deploy
+           docker run -dit -p 8081:80 -v /web-repo:/usr/local/apache2/htdocs --name prod_deploy "url"
+           else 
+           docker run -dit -p 8081:80 -v /web-repo:/usr/local/apache2/htdocs --name prod_deploy "url"
+           fi
+           fi
+           EOT
+           
+ // This will be trigerred as soon as job1 is completed and deploy a container on host system
+ //j3:  Test your app if it is working or not.
+ Build now is used 
+ if application fails,
+ go to job4 and mail to developer 
+ 
+ //j4: If the app is not working, then send an email to the developer with error messages.
+ CMD SHELL: python3/mail.py
+ 
+ //j5: If the container where the app is running. fails due to any reason then this job should automatically start the container again
+ SCM: BUILD TRIGGERS:
+ CMD SHELL: *****
+ //It keeps an eye on the application and if the container where the app is running. fails due to any reason then this job should automatically start the container again
